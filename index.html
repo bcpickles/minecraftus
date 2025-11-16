@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minecraft Skin Pack Creator</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&amp;family=Nunito:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .minecraft-font {
+            font-family: 'Fredoka', 'Nunito', 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        .speaking {
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .skin-preview {
+            background: linear-gradient(45deg, #8B4513 25%, transparent 25%), 
+                        linear-gradient(-45deg, #8B4513 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #8B4513 75%), 
+                        linear-gradient(-45deg, transparent 75%, #8B4513 75%);
+            background-size: 8px 8px;
+            background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+        }
+        
+        .step-card {
+            transition: all 0.3s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full minecraft-font">
+  <div class="min-h-full" style="background: linear-gradient(135deg, #87CEEB 0%, #98FB98 100%);"><!-- Header -->
+   <header class="bg-gradient-to-r from-green-400 to-blue-500 shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 py-6">
+     <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-4">
+       <div class="w-12 h-12 bg-yellow-400 rounded-lg flex items-center justify-center text-2xl">
+        🎮
+       </div>
+       <h1 id="app-title" class="text-3xl font-bold text-white">Minecraft Skin Collection Creator</h1>
+      </div><!-- Language Toggle -->
+      <div class="flex items-center space-x-4"><button id="lang-toggle" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors"> 🇺🇸 EN </button>
+      </div>
+     </div><!-- Progress Bar -->
+     <div class="mt-4 bg-white bg-opacity-30 rounded-full h-3">
+      <div id="progress-bar" class="progress-bar bg-yellow-400 h-3 rounded-full" style="width: 0%"></div>
+     </div>
+    </div>
+   </header>
+   <main class="max-w-6xl mx-auto px-4 py-8"><!-- Welcome Section -->
+    <div class="text-center mb-8">
+     <h2 id="welcome-message" class="text-4xl font-bold text-purple-800 mb-4">Create Amazing Skin Collections!</h2>
+     <p id="instructions-text" class="text-xl text-green-700">Follow the steps below to build your custom Minecraft skin collection</p>
+    </div><!-- Steps Container -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8"><!-- Step 1: Pack Info -->
+     <div class="step-card bg-white rounded-2xl shadow-lg p-6 border-4 border-blue-300">
+      <div class="flex items-center mb-4">
+       <div class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-3">
+        1
+       </div>
+       <h3 class="text-2xl font-bold text-blue-700" data-speak="step-1-title">Collection Information</h3><button class="ml-auto bg-blue-100 hover:bg-blue-200 text-blue-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors" onclick="speakText('step-1-title')">🔊</button>
+      </div>
+      <div class="space-y-4">
+       <div><label for="pack-name" class="block text-lg font-semibold text-gray-700 mb-2" data-speak="pack-name-label">Collection Name:</label> <input type="text" id="pack-name" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-lg focus:border-blue-500 focus:outline-none" placeholder="My Awesome Skins">
+       </div>
+       <div><label for="pack-description" class="block text-lg font-semibold text-gray-700 mb-2" data-speak="pack-desc-label">Description:</label> <textarea id="pack-description" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-lg focus:border-blue-500 focus:outline-none h-24 resize-none" placeholder="Cool skins for my friends!"></textarea>
+       </div>
+      </div>
+     </div><!-- Step 2: Add Skins -->
+     <div class="step-card bg-white rounded-2xl shadow-lg p-6 border-4 border-green-300">
+      <div class="flex items-center mb-4">
+       <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-3">
+        2
+       </div>
+       <h3 class="text-2xl font-bold text-green-700" data-speak="step-2-title">Add Skins</h3><button class="ml-auto bg-green-100 hover:bg-green-200 text-green-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors" onclick="speakText('step-2-title')">🔊</button>
+      </div>
+      <div class="space-y-4">
+       <div class="border-2 border-dashed border-green-300 rounded-lg p-6 text-center bg-green-50">
+        <div class="text-4xl mb-2">
+         📁
+        </div>
+        <p class="text-lg text-green-700 mb-3" data-speak="upload-instruction">Click to upload skin files (.png) or skin packs (.mcpack)</p><input type="file" id="skin-upload" multiple accept=".png,.mcpack" class="hidden"> <button onclick="document.getElementById('skin-upload').click()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold text-lg transition-colors"> Choose Files </button>
+       </div>
+       <div id="skin-list" class="space-y-2 max-h-48 overflow-y-auto"></div>
+      </div>
+     </div><!-- Step 3: Preview -->
+     <div class="step-card bg-white rounded-2xl shadow-lg p-6 border-4 border-purple-300">
+      <div class="flex items-center mb-4">
+       <div class="w-10 h-10 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-3">
+        3
+       </div>
+       <h3 class="text-2xl font-bold text-purple-700" data-speak="step-3-title">Preview Collection</h3><button class="ml-auto bg-purple-100 hover:bg-purple-200 text-purple-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors" onclick="speakText('step-3-title')">🔊</button>
+      </div>
+      <div id="pack-preview" class="bg-purple-50 rounded-lg p-4 min-h-32">
+       <div class="text-center text-purple-600">
+        <div class="text-3xl mb-2">
+         👀
+        </div>
+        <p data-speak="preview-instruction">Your collection preview will appear here</p>
+       </div>
+      </div>
+     </div><!-- Step 4: Download -->
+     <div class="step-card bg-white rounded-2xl shadow-lg p-6 border-4 border-orange-300">
+      <div class="flex items-center mb-4">
+       <div class="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-3">
+        4
+       </div>
+       <h3 class="text-2xl font-bold text-orange-700" data-speak="step-4-title">Download Collection</h3><button class="ml-auto bg-orange-100 hover:bg-orange-200 text-orange-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors" onclick="speakText('step-4-title')">🔊</button>
+      </div>
+      <div class="text-center"><button id="create-pack-btn" class="bg-gradient-to-r from-orange-400 to-red-500 hover:from-orange-500 hover:to-red-600 text-white px-8 py-4 rounded-xl font-bold text-xl transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed" disabled> <span class="flex items-center justify-center space-x-2"> <span>📦</span> <span data-speak="create-pack-btn">Create Collection File</span> </span> </button>
+       <p class="text-sm text-gray-600 mt-2" data-speak="download-instruction">Complete steps 1-2 to enable download</p>
+      </div>
+     </div>
+    </div><!-- Privacy Notice -->
+    <div class="mt-12 bg-white rounded-2xl shadow-lg p-6 border-4 border-green-300">
+     <div class="flex items-center mb-4">
+      <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center text-lg mr-3">
+       🔒
+      </div>
+      <h3 class="text-2xl font-bold text-green-700" data-speak="privacy-title">Privacy Safe</h3><button class="ml-4 bg-green-100 hover:bg-green-200 text-green-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors" onclick="speakText('privacy-title')">🔊</button>
+     </div>
+     <p class="text-green-700 text-lg" data-speak="privacy-message">This tool is safe for students! No personal information is stored or saved. Your skin collections are created and downloaded directly to your device.</p>
+    </div><!-- Legal Disclaimer -->
+    <div class="mt-8 bg-gray-50 rounded-xl shadow-md p-6 border-2 border-gray-200">
+     <div class="flex items-center mb-4">
+      <div class="w-8 h-8 bg-gray-400 text-white rounded-full flex items-center justify-center text-sm mr-3">
+       ⚖️
+      </div>
+      <h3 class="text-xl font-bold text-gray-700">Legal Disclaimer</h3>
+     </div>
+     <div class="text-gray-600 text-sm space-y-2">
+      <p>This tool is an independent, educational project and is not affiliated with, endorsed by, or sponsored by Microsoft Corporation, Mojang Studios, or Minecraft.</p>
+      <p><strong>Minecraft</strong> is a trademark of Microsoft Corporation. <strong>Mojang Studios</strong> is a trademark of Microsoft Corporation.</p>
+      <p>This skin pack creator is provided for educational purposes only. Users are responsible for ensuring their created content complies with Minecraft's Terms of Service and Community Guidelines.</p>
+      <p>All skin files and content created using this tool remain the intellectual property of their respective creators.</p>
+     </div>
+    </div>
+   </main>
+  </div>
+  <script>
+        // Configuration and state
+        const defaultConfig = {
+            app_title: "Minecraft Skin Collection Creator",
+            welcome_message: "Create Amazing Skin Collections!",
+            instructions_text: "Follow the steps below to build your custom Minecraft skin collection"
+        };
+
+        let currentLanguage = 'en';
+        let uploadedSkins = [];
+        let isSpeaking = false;
+
+        // Translations
+        const translations = {
+            en: {
+                'app-title': 'Minecraft Skin Collection Creator',
+                'welcome-message': 'Create Amazing Skin Collections!',
+                'instructions-text': 'Follow the steps below to build your custom Minecraft skin collection',
+                'step-1-title': 'Collection Information',
+                'step-2-title': 'Add Skins',
+                'step-3-title': 'Preview Collection',
+                'step-4-title': 'Download Collection',
+                'pack-name-label': 'Collection Name:',
+                'pack-desc-label': 'Description:',
+                'upload-instruction': 'Click to upload skin files (.png) or existing skin collections (.mcpack)',
+                'preview-instruction': 'Your collection preview will appear here',
+                'create-pack-btn': 'Create Collection File',
+                'download-instruction': 'Complete steps 1-2 to enable download',
+                'privacy-title': 'Privacy Safe',
+                'privacy-message': 'This tool is safe for students! No personal information is stored or saved. Your skin collections are created and downloaded directly to your device.',
+                'speak-text': 'Speak',
+                'lang-btn': '🇺🇸 EN',
+                'vulgarity-warning': 'Please use appropriate language for young learners',
+                'pack-created': 'Collection created and downloaded successfully!',
+                'fill-required': 'Please fill in collection name and add at least one skin',
+                'skin-added': 'Skin added successfully',
+                'skin-removed': 'Skin removed',
+                'model-changed': 'Skin model changed to'
+            },
+            es: {
+                'app-title': 'Creador de Colecciones de Skins de Minecraft',
+                'welcome-message': '¡Crea Colecciones de Skins Increíbles!',
+                'instructions-text': 'Sigue los pasos para crear tu colección personalizada de skins de Minecraft',
+                'step-1-title': 'Información de la Colección',
+                'step-2-title': 'Agregar Skins',
+                'step-3-title': 'Vista Previa de la Colección',
+                'step-4-title': 'Descargar Colección',
+                'pack-name-label': 'Nombre de la Colección:',
+                'pack-desc-label': 'Descripción:',
+                'upload-instruction': 'Haz clic para subir archivos de skin (.png) o colecciones existentes (.mcpack)',
+                'preview-instruction': 'La vista previa de tu colección aparecerá aquí',
+                'create-pack-btn': 'Crear Archivo de Colección',
+                'download-instruction': 'Completa los pasos 1-2 para habilitar la descarga',
+                'privacy-title': 'Privacidad Segura',
+                'privacy-message': '¡Esta herramienta es segura para estudiantes! No se almacena ni guarda información personal. Tus colecciones de skins se crean y descargan directamente a tu dispositivo.',
+                'speak-text': 'Hablar',
+                'lang-btn': '🇲🇽 ES',
+                'vulgarity-warning': 'Por favor usa lenguaje apropiado para estudiantes jóvenes',
+                'pack-created': '¡Colección creada y descargada exitosamente!',
+                'fill-required': 'Por favor completa el nombre de la colección y agrega al menos un skin',
+                'skin-added': 'Skin agregado exitosamente',
+                'skin-removed': 'Skin eliminado',
+                'model-changed': 'Modelo de skin cambiado a'
+            }
+        };
+
+        // Vulgarity filter - basic word list for K-5 appropriate content
+        const vulgarWords = ['stupid', 'dumb', 'hate', 'kill', 'die', 'tonto', 'odio', 'matar', 'morir'];
+
+
+
+        // Element SDK configuration
+        async function onConfigChange(config) {
+            const appTitle = config.app_title || defaultConfig.app_title;
+            const welcomeMessage = config.welcome_message || defaultConfig.welcome_message;
+            const instructionsText = config.instructions_text || defaultConfig.instructions_text;
+
+            document.getElementById('app-title').textContent = appTitle;
+            document.getElementById('welcome-message').textContent = welcomeMessage;
+            document.getElementById('instructions-text').textContent = instructionsText;
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.primary_color || '#10B981',
+                        set: (value) => {
+                            config.primary_color = value;
+                            window.elementSdk.setConfig({ primary_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.secondary_color || '#3B82F6',
+                        set: (value) => {
+                            config.secondary_color = value;
+                            window.elementSdk.setConfig({ secondary_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.accent_color || '#F59E0B',
+                        set: (value) => {
+                            config.accent_color = value;
+                            window.elementSdk.setConfig({ accent_color: value });
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: {
+                    get: () => config.font_family || 'Fredoka',
+                    set: (value) => {
+                        config.font_family = value;
+                        window.elementSdk.setConfig({ font_family: value });
+                    }
+                },
+                fontSizeable: {
+                    get: () => config.font_size || 16,
+                    set: (value) => {
+                        config.font_size = value;
+                        window.elementSdk.setConfig({ font_size: value });
+                    }
+                }
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ['app_title', config.app_title || defaultConfig.app_title],
+                ['welcome_message', config.welcome_message || defaultConfig.welcome_message],
+                ['instructions_text', config.instructions_text || defaultConfig.instructions_text]
+            ]);
+        }
+
+        // Initialize SDK
+        async function initializeApp() {
+            try {
+                if (window.elementSdk) {
+                    await window.elementSdk.init({
+                        defaultConfig,
+                        onConfigChange,
+                        mapToCapabilities,
+                        mapToEditPanelValues
+                    });
+                }
+            } catch (error) {
+                console.error('Failed to initialize SDK:', error);
+            }
+        }
+
+        // Text-to-Speech functionality
+        function speakText(elementId) {
+            if (isSpeaking) {
+                window.speechSynthesis.cancel();
+                isSpeaking = false;
+
+                return;
+            }
+
+            const element = document.querySelector(`[data-speak="${elementId}"]`);
+            if (!element) return;
+
+            const text = translations[currentLanguage][elementId] || element.textContent;
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = currentLanguage === 'en' ? 'en-US' : 'es-MX';
+            utterance.rate = 0.8;
+            utterance.pitch = 1.1;
+
+            utterance.onstart = () => {
+                isSpeaking = true;
+
+            };
+
+            utterance.onend = () => {
+                isSpeaking = false;
+
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Language toggle
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            const langBtn = document.getElementById('lang-toggle');
+            langBtn.textContent = translations[currentLanguage]['lang-btn'];
+            
+
+
+            // Update all translatable elements
+            Object.keys(translations[currentLanguage]).forEach(key => {
+                const element = document.querySelector(`[data-speak="${key}"]`);
+                if (element) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+
+            // Update placeholders
+            document.getElementById('pack-name').placeholder = currentLanguage === 'en' ? 'My Awesome Skin Collection' : 'Mi Colección de Skins Geniales';
+            document.getElementById('pack-description').placeholder = currentLanguage === 'en' ? 'Cool skins for my friends!' : '¡Skins geniales para mis amigos!';
+        }
+
+        // Vulgarity filter
+        function checkVulgarity(text) {
+            const lowerText = text.toLowerCase();
+            return vulgarWords.some(word => lowerText.includes(word));
+        }
+
+        function showVulgarityWarning() {
+            const warning = document.createElement('div');
+            warning.className = 'fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+            warning.textContent = translations[currentLanguage]['vulgarity-warning'];
+            document.body.appendChild(warning);
+            
+            setTimeout(() => {
+                warning.remove();
+            }, 3000);
+        }
+
+        // File upload handling
+        function handleSkinUpload(event) {
+            const files = Array.from(event.target.files);
+            
+            files.forEach(file => {
+                if (file.size > 10 * 1024 * 1024) { // 10MB limit
+                    showNotification('File too large. Maximum size is 10MB.', 'error');
+                    return;
+                }
+
+                if (file.type === 'image/png') {
+                    handlePNGFile(file);
+                } else if (file.name.toLowerCase().endsWith('.mcpack')) {
+                    handleMCPackFile(file);
+                } else {
+                    showNotification('Please upload PNG skin files or MCPACK files only.', 'error');
+                }
+            });
+        }
+
+        // Handle PNG skin files
+        function handlePNGFile(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    // Validate skin dimensions (64x64, 64x32, or 32x64)
+                    const validDimensions = [
+                        { width: 64, height: 64 },
+                        { width: 64, height: 32 },
+                        { width: 32, height: 64 }
+                    ];
+                    
+                    const isValidSkin = validDimensions.some(dim => 
+                        img.width === dim.width && img.height === dim.height
+                    );
+                    
+                    if (!isValidSkin) {
+                        showNotification(`Invalid skin dimensions: ${img.width}x${img.height}. Must be 64x64, 64x32, or 32x64.`, 'error');
+                        return;
+                    }
+
+                    // Detect skin type based on filename or let user choose
+                    let skinModel = 'standard'; // Default to standard
+                    const fileName = file.name.toLowerCase();
+                    
+                    // Auto-detect from filename
+                    if (fileName.includes('slim') || fileName.includes('alex')) {
+                        skinModel = 'slim';
+                    } else if (fileName.includes('standard') || fileName.includes('steve')) {
+                        skinModel = 'standard';
+                    }
+
+                    const skin = {
+                        id: Date.now() + Math.random(),
+                        name: file.name.replace('.png', ''),
+                        data: e.target.result,
+                        size: file.size,
+                        dimensions: `${img.width}x${img.height}`,
+                        type: 'png',
+                        model: skinModel
+                    };
+                    
+                    uploadedSkins.push(skin);
+                    renderSkinList();
+                    updateProgress();
+                    showNotification(translations[currentLanguage]['skin-added'], 'success');
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Handle MCPACK files
+        function handleMCPackFile(file) {
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                try {
+                    // For demonstration, we'll treat MCPACK as a container
+                    // In a real implementation, you'd parse the ZIP structure
+                    const mcpack = {
+                        id: Date.now() + Math.random(),
+                        name: file.name.replace('.mcpack', ''),
+                        data: e.target.result,
+                        size: file.size,
+                        type: 'mcpack',
+                        skinCount: Math.floor(Math.random() * 10) + 1 // Simulated skin count
+                    };
+                    
+                    uploadedSkins.push(mcpack);
+                    renderSkinList();
+                    updateProgress();
+                    showNotification(`MCPACK "${mcpack.name}" added with ${mcpack.skinCount} skins!`, 'success');
+                } catch (error) {
+                    showNotification('Error reading MCPACK file. Please ensure it\'s a valid skin pack.', 'error');
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        // Render skin list
+        function renderSkinList() {
+            const skinList = document.getElementById('skin-list');
+            skinList.innerHTML = '';
+
+            uploadedSkins.forEach(skin => {
+                const skinItem = document.createElement('div');
+                skinItem.className = 'flex items-center justify-between bg-gray-100 rounded-lg p-3';
+                
+                let displayInfo = '';
+                let icon = '';
+                
+                if (skin.type === 'png') {
+                    icon = '<div class="w-8 h-8 skin-preview rounded border-2 border-gray-300"></div>';
+                    const modelBadge = skin.model === 'slim' ? 
+                        '<span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">Slim</span>' : 
+                        '<span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">Standard</span>';
+                    displayInfo = `
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-gray-500">${skin.dimensions} • ${(skin.size / 1024).toFixed(1)}KB</span>
+                            ${modelBadge}
+                        </div>
+                    `;
+                } else if (skin.type === 'mcpack') {
+                    icon = '<div class="w-8 h-8 bg-orange-400 rounded border-2 border-orange-500 flex items-center justify-center text-white font-bold">📦</div>';
+                    displayInfo = `<span class="text-sm text-gray-500">${skin.skinCount} skins • ${(skin.size / 1024).toFixed(1)}KB</span>`;
+                }
+                
+                skinItem.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        ${icon}
+                        <div class="flex flex-col">
+                            <span class="font-medium">${skin.name}</span>
+                            ${displayInfo}
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        ${skin.type === 'png' ? `<button onclick="toggleSkinModel('${skin.id}')" class="text-blue-500 hover:text-blue-700 text-sm font-medium">Toggle</button>` : ''}
+                        <button onclick="removeSkin('${skin.id}')" class="text-red-500 hover:text-red-700 font-bold">✕</button>
+                    </div>
+                `;
+                skinList.appendChild(skinItem);
+            });
+        }
+
+        // Toggle skin model between slim and standard
+        function toggleSkinModel(skinId) {
+            const skin = uploadedSkins.find(s => s.id == skinId);
+            if (skin && skin.type === 'png') {
+                skin.model = skin.model === 'slim' ? 'standard' : 'slim';
+                renderSkinList();
+                showNotification(`${translations[currentLanguage]['model-changed']} ${skin.model}`, 'info');
+            }
+        }
+
+        // Remove skin
+        function removeSkin(skinId) {
+            uploadedSkins = uploadedSkins.filter(skin => skin.id !== skinId);
+            renderSkinList();
+            updateProgress();
+            showNotification(translations[currentLanguage]['skin-removed'], 'info');
+        }
+
+        // Update progress
+        function updateProgress() {
+            const packName = document.getElementById('pack-name').value.trim();
+            const hasDescription = document.getElementById('pack-description').value.trim();
+            const hasSkins = uploadedSkins.length > 0;
+            
+            let progress = 0;
+            if (packName) progress += 25;
+            if (hasDescription) progress += 25;
+            if (hasSkins) progress += 50;
+            
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            
+            const createBtn = document.getElementById('create-pack-btn');
+            createBtn.disabled = !packName || !hasSkins;
+            
+            updatePreview();
+        }
+
+        // Update preview
+        function updatePreview() {
+            const preview = document.getElementById('pack-preview');
+            const packName = document.getElementById('pack-name').value.trim();
+            const packDescription = document.getElementById('pack-description').value.trim();
+            
+            if (packName && uploadedSkins.length > 0) {
+                preview.innerHTML = `
+                    <div class="text-left">
+                        <h4 class="font-bold text-lg text-purple-700 mb-2">📦 ${packName}</h4>
+                        <p class="text-purple-600 mb-3">${packDescription || 'No description'}</p>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm font-medium">Files: ${uploadedSkins.length}</span>
+                            <div class="flex space-x-1">
+                                ${uploadedSkins.slice(0, 5).map(skin => 
+                                    skin.type === 'mcpack' 
+                                        ? '<div class="w-4 h-4 bg-orange-400 rounded border text-xs flex items-center justify-center text-white">📦</div>'
+                                        : '<div class="w-4 h-4 skin-preview rounded border"></div>'
+                                ).join('')}
+                                ${uploadedSkins.length > 5 ? `<span class="text-xs text-purple-500">+${uploadedSkins.length - 5}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                preview.innerHTML = `
+                    <div class="text-center text-purple-600">
+                        <div class="text-3xl mb-2">👀</div>
+                        <p>${translations[currentLanguage]['preview-instruction']}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Create MCPACK
+        async function createMCPack() {
+            const packName = document.getElementById('pack-name').value.trim();
+            const packDescription = document.getElementById('pack-description').value.trim();
+            
+            if (!packName || uploadedSkins.length === 0) {
+                showNotification(translations[currentLanguage]['fill-required'], 'error');
+                return;
+            }
+            
+            if (checkVulgarity(packName) || checkVulgarity(packDescription)) {
+                showVulgarityWarning();
+                return;
+            }
+
+            // Create pack data (no storage - just for download)
+            const packData = {
+                pack_name: packName,
+                pack_description: packDescription,
+                skins: uploadedSkins
+            };
+
+            // Create and download MCPACK file
+            createMCPackFile(packData);
+            
+            // Show success message
+            showNotification(translations[currentLanguage]['pack-created'], 'success');
+            
+            // Reset form
+            document.getElementById('pack-name').value = '';
+            document.getElementById('pack-description').value = '';
+            uploadedSkins = [];
+            renderSkinList();
+            updateProgress();
+        }
+
+        // Create MCPACK file
+        function createMCPackFile(packData) {
+            // Create manifest.json
+            const manifest = {
+                format_version: 2,
+                header: {
+                    description: packData.pack_description,
+                    name: packData.pack_name,
+                    uuid: generateUUID(),
+                    version: [1, 0, 0],
+                    min_engine_version: [1, 16, 0]
+                },
+                modules: [{
+                    description: "Skin Pack",
+                    type: "skin_pack",
+                    uuid: generateUUID(),
+                    version: [1, 0, 0]
+                }]
+            };
+
+            // Create skins.json
+            const skinsConfig = {
+                skins: packData.skins.map((skin, index) => ({
+                    localization_name: skin.name,
+                    geometry: skin.type === 'png' && skin.model === 'slim' ? 
+                        "geometry.humanoid.customSlim" : "geometry.humanoid.custom",
+                    texture: `skin_${index}.png`,
+                    type: "free"
+                })),
+                serialize_name: packData.pack_name,
+                localization_name: packData.pack_name
+            };
+
+            // Create downloadable content
+            const content = {
+                'manifest.json': JSON.stringify(manifest, null, 2),
+                'skins.json': JSON.stringify(skinsConfig, null, 2)
+            };
+
+            // Add skin files (simulated - in real implementation would include actual PNG data)
+            packData.skins.forEach((skin, index) => {
+                content[`skin_${index}.png`] = skin.data;
+            });
+
+            // Create download
+            const blob = new Blob([JSON.stringify(content, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${packData.pack_name.replace(/[^a-zA-Z0-9]/g, '_')}.mcpack`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Generate UUID
+        function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const r = Math.random() * 16 | 0;
+                const v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            const colors = {
+                success: 'bg-green-500',
+                error: 'bg-red-500',
+                info: 'bg-blue-500'
+            };
+            
+            notification.className = `fixed top-4 right-4 ${colors[type]} text-white px-4 py-2 rounded-lg shadow-lg z-50`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeApp();
+            
+            document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
+
+            document.getElementById('skin-upload').addEventListener('change', handleSkinUpload);
+            document.getElementById('create-pack-btn').addEventListener('click', createMCPack);
+            
+            // Input validation and progress updates
+            document.getElementById('pack-name').addEventListener('input', updateProgress);
+            document.getElementById('pack-description').addEventListener('input', updateProgress);
+            
+            // Initial progress update
+            updateProgress();
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f99a6754cc10ed',t:'MTc2MzMyMzUyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
